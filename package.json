@@ -1,0 +1,12 @@
+{
+    "name": "Otaku!",
+    "version" : "1.0.0",
+    "main": "main.html",
+    "author": "moonrailgun",
+    "window": {
+        "title": "Otaku!",
+        "toolbar": true,
+        "width": 800,
+        "height": 600
+    }
+}
