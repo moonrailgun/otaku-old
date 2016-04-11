@@ -7,50 +7,67 @@
     <link href="css/font-awesome.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet">
+    <link href="css/mobilebone.css" rel="stylesheet">
+    <link href="css/mobilebone.animate.css" rel="stylesheet">
 </head>
 <body>
-<nav class="navbar navbar-default">
-    <a class="navbar-brand">Otaku!</a>
-    <div class="sidebar navbar-default" role="navigation">
-        <ul class="nav">
-            <li>
-                <a href="#" class="active show-page" data-page="page/app.html">
-                    <i class="icon-desktop"></i>
-                    <span>我的应用</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="show-page" data-page="page/shop.html">
-                    <i class="icon-shopping-cart"></i>
-                    <span>应用商店</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="show-page" data-page="page/chattingRoom.html">
-                    <i class="icon-comments"></i>
-                    <span>聊天室</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="show-page" data-page="page/settings.html">
-                    <i class="icon-asterisk"></i>
-                    <span>设置</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="show-page" data-page="page/about.html">
-                    <i class="icon-reorder"></i>
-                    <span>关于</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-</nav>
-<div id="page-wrapper">
+<div id="page-home" class="page in" data-form="fade">
+    <nav class="navbar navbar-default">
+        <a class="navbar-brand">Otaku!</a>
+        <div class="sidebar navbar-default" role="navigation">
+            <ul class="nav">
+                <li>
+                    <a href="#" class="active show-page" data-page="page/app.html">
+                        <i class="icon-desktop"></i>
+                        <span>我的应用</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="show-page" data-page="page/shop.html">
+                        <i class="icon-shopping-cart"></i>
+                        <span>应用商店</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="show-page" data-page="page/chattingRoom.html">
+                        <i class="icon-comments"></i>
+                        <span>聊天室</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="show-page" data-page="page/settings.html">
+                        <i class="icon-cog"></i>
+                        <span>设置</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#page-app" class="show-page" data-page="page/about.html">
+                        <i class="icon-reorder"></i>
+                        <span>关于</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="page-wrapper">
 
+    </div>
+</div>
+<div id="page-app" class="page out" data-form="slideup">
+    <nav class="header-bar">
+        <a href="#page-home" class="header-back" data-rel="back">
+            <i class="icon-angle-left"></i>
+            <span>返回</span>
+        </a>
+        <div class="header-title">
+            应用
+        </div>
+    </nav>
+    <div id="app-wrapper"></div>
 </div>
 </body>
 <script src="js/jquery-2.1.4.js"></script>
 <script src="js/bootstrap.js"></script>
+<script src="js/mobilebone.js"></script>
 <script src="js/main.js"></script>
 </html>
