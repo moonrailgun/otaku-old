@@ -5,6 +5,7 @@
 var inventory = require("./app/inventory.json");
 var fs = require("fs");
 
+//打开APP窗口
 var openAppWin = function (url, index) {
     var dirUrl = './app/' + url + '/';
     var fullUrl = dirUrl + index;
@@ -30,6 +31,7 @@ var openAppWin = function (url, index) {
     })
 };
 
+//载入APP列表
 var loadApp = function (appConfig) {
     var index = appConfig.index;
     var name = appConfig.name;
@@ -54,3 +56,4 @@ if (inventory) {
         loadApp(inventory[i]);
     }
 }
+UpdateShowPageBtnEvent();//更新事件

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #addApp-wrapper {
+            display: table;
+            height: 90%;
+            width: 100%;
+        }
+
+        #selectFile {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        #selectFileButton {
+            width: 40%;
+            margin: auto;
+            font-size: 20px;
+            line-height: 46px;
+        }
+
+        #selectFile i {
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="addApp-wrapper">
+    <div id="selectFile">
+        <div id="selectFileButton" class="btn btn-default btn-block"><i class="icon-file-alt"></i>选择文件</div>
+        <input style="display: none;" id="openFile" type="file" accept=".json,.zip"/>
+    </div>
+</div>
+<script>
+    var installApp = function (url) {
+        console.log(url);
+
+        var tmp = url.split('.');
+        var suffix = tmp[tmp.length - 1];
+        if(suffix == 'zip'){
+            var
+        }else if(suffix == 'json'){
+
+        }
+    };
+
+    $(function () {
+        $('#selectFileButton').click(function () {
+            $('#openFile').trigger("click");
+        });
+        $('#openFile').change(function () {
+            var url = $(this).val();
+            installApp(url);
+        });
+    });
+</script>
+</body>
+</html>

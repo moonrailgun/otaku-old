@@ -15,11 +15,11 @@ var UpdateShowPageBtnEvent = function(){
             currentAjax.abort();
             delete currentAjax;
         }
+
         currentAjax = $.get(pageUrl, function(data,status){
             $('#page-wrapper').html(data);
             UpdateShowPageBtnEvent();
         });
-
     });
 };
 
@@ -29,7 +29,7 @@ $(function(){
         width = (this.window.innerWidth > 0) ? this.window.innerWidth : this.screen.width;
         if (width < 768) {
             $('div.navbar-collapse').addClass('collapse');
-            topOffset = 100; // 2-row-menu
+            topOffset = 100;
         } else {
             $('div.navbar-collapse').removeClass('collapse');
         }
