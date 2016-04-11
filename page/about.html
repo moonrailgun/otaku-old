@@ -3,8 +3,35 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+    <style>
+        #about-header{
+            text-align: left;
+            text-shadow: 0 2px 3px #222;
+            font-size: 40px;
+            padding: 15px 0;
+        }
+    </style>
 </head>
 <body>
-<h1>about</h1>
+<div id="about-wrapper">
+    <div id="about-header">Otaku!</div>
+    <div id="nwjserver">
+        <p>版本号:</p>
+        <p>nw.js v<span id="nw-version"></span></p>
+        <p>Node v<span id="node-version"></span></p>
+        <p>Chromium <span id="chromium-version"></span></p>
+    </div>
+    <div>
+        <h3>关于本作品</h3>
+        <p>本作品基于GPLv2协议，平台源码可以在<a href="https://github.com/moonrailgun/otaku" target="_blank">Github</a>上看到</p>
+        <p>github:https://github.com/moonrailgun/otaku</p>
+    </div>
+    <div>
+        <h3>关于提交作品</h3>
+        <p>欢迎将基于HTML5技术制作的应用提交到本平台。可以通过向<a href="https://github.com/moonrailgun/otaku/issues" target="_blank">Github</a>提交Issue的方式来提交你的作品</p>
+        <p>(*^__^*) 欢迎来稿</p>
+    </div>
+</div>
+<script src="js/about.js"></script>
 </body>
 </html>
