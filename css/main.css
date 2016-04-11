@@ -3,7 +3,13 @@ html, body{
 }
 body{
     background-color: #f8f8f8;
+    -webkit-user-select: none;
+    cursor: default !important;
 }
+*{
+    /*cursor: default !important;*/
+}
+
 nav.navbar{
     margin-bottom: 0;
 }
@@ -24,9 +30,9 @@ nav.navbar{
     margin-top: 51px;
 }
 #page-wrapper{
-    padding: 0 15px;
     background-color: #fff;
     overflow: hidden;
+    padding: 10px 15px 0;
 }
 
 @media (min-width: 768px){

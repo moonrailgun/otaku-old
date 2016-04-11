@@ -2,6 +2,26 @@
  * Created by Chen on 2016-04-10.
  */
 
+var currentAjax;
+var UpdateShowPageBtnEvent = function(){
+    $('.show-page').click(function(){
+        if($(this).get(0).tagName == 'A'){
+            $('.active').removeClass('active');
+            $(this).addClass('active');
+        }
+
+        var pageUrl = $(this).data('page');
+        if(!!currentAjax) {
+            currentAjax.abort();
+            delete currentAjax;
+        }
+        currentAjax = $.get(pageUrl, function(data,status){
+            $('#page-wrapper').html(data);
+            UpdateShowPageBtnEvent();
+        });
+
+    });
+};
 
 $(function(){
     $(window).bind("load resize", function() {
@@ -22,13 +42,8 @@ $(function(){
         }
     });
 
-    $('ul.nav li a').click(function(){
-        $('.active').removeClass('active');
-        $(this).addClass('active');
-
-        var pageUrl = $(this).data('page');
-        $.get(pageUrl, function(data,status){
-            $('#page-wrapper').html(data);
-        });
-    })
+    UpdateShowPageBtnEvent();
+    $.get('page/app.html', function(data,status){
+        $('#page-wrapper').html(data);
+    });
 });
