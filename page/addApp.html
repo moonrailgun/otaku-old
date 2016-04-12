@@ -28,6 +28,7 @@
     </style>
 </head>
 <body>
+<div></div>
 <div id="addApp-wrapper">
     <div id="selectFile">
         <div id="selectFileButton" class="btn btn-default btn-block"><i class="icon-file-alt"></i>选择文件</div>
@@ -35,15 +36,53 @@
     </div>
 </div>
 <script>
-    var installApp = function (url) {
+    var path = require('path');
+    var fs = require('fs');
+    var fileUtils = require('./js/utils/fileUtils');
+
+    var installApp = function (url, cb) {
         console.log(url);
 
-        var tmp = url.split('.');
-        var suffix = tmp[tmp.length - 1];
-        if(suffix == 'zip'){
-            var
-        }else if(suffix == 'json'){
+        var fileDir = path.dirname(url);
+        var filename = path.basename(fileDir);
+        var suffix = path.extname(url);
+        if(suffix == '.zip'){
+            console.log('尚未完成');
+        }else if(suffix == '.json') {
+            fs.readFile(url,'utf8', function(err,data){
+                if(err) throw err;
+                if(path.basename(url, '.json') == 'package') {
+                    //nodejs 项目
+                    data = JSON.parse(data);
+                    var invUrl = path.resolve('./app/inventory.json');
+                    var dirname = path.basename(fileDir) ;
+                    var json = require(invUrl);
 
+                    console.log('配置读取成功。开始复制文件包到本地');
+                    fileUtils.copyDir(fileDir, path.join(path.dirname(invUrl) , dirname) , function(err){
+                        if(err) {
+                            console.log(err);
+                            throw err;
+                        }
+
+                        console.log('文件包复制完毕');
+                        json.push({
+                            name: data.name || dirname,
+                            index: data.main,
+                            type: "window",
+                            url: dirname
+                        });
+                        fs.writeFile(invUrl, JSON.stringify(json, null, 4),'utf8', function(err){
+                            if(err){
+                                console.log('写入数据失败');
+                                throw err;
+                            }
+                            console.log('写入完毕');
+                            cb();
+                        });
+                    });
+                }
+            });
         }
     };
 
@@ -53,7 +92,10 @@
         });
         $('#openFile').change(function () {
             var url = $(this).val();
-            installApp(url);
+            installApp(url, function(){
+                //alert('安装完毕!');
+
+            });
         });
     });
 </script>
