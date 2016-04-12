@@ -93,8 +93,13 @@
         $('#openFile').change(function () {
             var url = $(this).val();
             installApp(url, function(){
-                //alert('安装完毕!');
-
+                var isReturn = confirm("安装完毕!是否返回应用首页?");
+                if(isReturn){
+                    $.get('page/app.html', function(data,status){
+                        $('#page-wrapper').html(data);
+                        UpdateShowPageBtnEvent();
+                    });
+                }
             });
         });
     });

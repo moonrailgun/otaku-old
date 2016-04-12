@@ -4,7 +4,7 @@
 
 var currentAjax;
 var UpdateShowPageBtnEvent = function(){
-    $('.show-page').click(function(){
+    $('.show-page').click(function() {
         if($(this).get(0).tagName == 'A'){
             $('.active').removeClass('active');
             $(this).addClass('active');
