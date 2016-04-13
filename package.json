@@ -10,6 +10,7 @@
     "height": 600
   },
   "dependencies": {
+    "adm-zip": "^0.4.7",
     "async": "^1.5.2"
   }
 }

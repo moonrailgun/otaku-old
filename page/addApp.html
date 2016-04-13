@@ -39,50 +39,106 @@
     var path = require('path');
     var fs = require('fs');
     var fileUtils = require('./js/utils/fileUtils');
+    var AdmZip = require('adm-zip');
 
+    var unzip = function (url, cb) {
+        var filename = path.basename(url, '.zip');
+        var zip = new AdmZip(url);
+        var fileUrl = path.join(path.resolve('./app/'), filename);
+        zip.extractAllToAsync(fileUrl, true, function (err) {
+            if (err) {
+                cb(err);
+            }
+            console.log("解压完毕，解压至:" + fileUrl);
+            cb(null, fileUrl);
+        })
+    };
+
+    //输入应用文件夹地址或package.json地址，返回数据包对象
+    var parsePackage = function (url, cb) {
+        if (path.basename(url) != 'package.json') {
+            url = path.join(url, './package.json');
+        }
+        fs.readFile(url, 'utf8', function (err, data) {
+            if (err) {
+                cb(err);
+            } else {
+                var dirName = path.basename(path.dirname(url));
+                data = JSON.parse(data);
+                var dat = {
+                    name: data.name || dirName,
+                    index: data.main,
+                    type: "window",
+                    url: dirName
+                };
+                cb(null, dat);
+            }
+        });
+    };
+
+    //todo 重复安装检测
     var installApp = function (url, cb) {
         console.log(url);
-
         var fileDir = path.dirname(url);
-        var filename = path.basename(fileDir);
         var suffix = path.extname(url);
-        if(suffix == '.zip'){
-            console.log('尚未完成');
-        }else if(suffix == '.json') {
-            fs.readFile(url,'utf8', function(err,data){
-                if(err) throw err;
-                if(path.basename(url, '.json') == 'package') {
-                    //nodejs 项目
-                    data = JSON.parse(data);
-                    var invUrl = path.resolve('./app/inventory.json');
-                    var dirname = path.basename(fileDir) ;
+        var invUrl = path.resolve('./app/inventory.json');
+        if (suffix == '.zip') {
+            console.log('选择zip压缩包');
+            unzip(url, function (err, fileUrl) {
+                if (err) {
+                    console.log(err);
+                    throw err;
+                }
+                console.log('文件解压完毕，正在解析配置文件');
+                parsePackage(fileUrl, function(err,data){
+                    if(err){
+                        console.log(err);
+                        throw err;
+                    }
+                    console.log('配置文件解析完毕:' + JSON.stringify(data));
+                    console.log('开始写入配置文件');
                     var json = require(invUrl);
-
-                    console.log('配置读取成功。开始复制文件包到本地');
-                    fileUtils.copyDir(fileDir, path.join(path.dirname(invUrl) , dirname) , function(err){
-                        if(err) {
-                            console.log(err);
+                    json.push(data);//添加到配置文件
+                    fs.writeFile(invUrl, JSON.stringify(json, null, 4), 'utf8', function (err) {
+                        if (err) {
+                            console.log('写入数据失败');
                             throw err;
                         }
-
-                        console.log('文件包复制完毕');
-                        json.push({
-                            name: data.name || dirname,
-                            index: data.main,
-                            type: "window",
-                            url: dirname
-                        });
-                        fs.writeFile(invUrl, JSON.stringify(json, null, 4),'utf8', function(err){
-                            if(err){
-                                console.log('写入数据失败');
-                                throw err;
-                            }
-                            console.log('写入完毕');
-                            cb();
-                        });
+                        console.log('配置写入完毕，安装完毕。');
+                        cb();
                     });
-                }
+                })
             });
+        } else if (suffix == '.json') {
+            console.log('选择json文件');
+            fileUtils.copyDir(fileDir, path.join(path.dirname(invUrl), path.basename(fileDir)), function (err) {
+                if (err) {
+                    console.log(err);
+                    throw err;
+                }
+                console.log('文件包复制完毕');
+                console.log('开始解析配置文件');
+                parsePackage(url, function (err, data) {
+                    if (err) {
+                        console.log(err);
+                        throw err;
+                    }
+                    console.log('读取配置文件成功:'+ JSON.stringify(data));
+                    console.log('开始写入配置文件');
+                    var json = require(invUrl);
+                    json.push(data);//添加到配置文件
+                    fs.writeFile(invUrl, JSON.stringify(json, null, 4), 'utf8', function (err) {
+                        if (err) {
+                            console.log('写入数据失败');
+                            throw err;
+                        }
+                        console.log('配置写入完毕，安装完毕。');
+                        cb();
+                    });
+                });
+            });
+        }else{
+            console.log('不支持的文件类型');
         }
     };
 
@@ -92,10 +148,10 @@
         });
         $('#openFile').change(function () {
             var url = $(this).val();
-            installApp(url, function(){
+            installApp(url, function () {
                 var isReturn = confirm("安装完毕!是否返回应用首页?");
-                if(isReturn){
-                    $.get('page/app.html', function(data,status){
+                if (isReturn) {
+                    $.get('page/app.html', function (data, status) {
                         $('#page-wrapper').html(data);
                         UpdateShowPageBtnEvent();
                     });
