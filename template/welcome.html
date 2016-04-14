@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <title></title>
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        #welcome {
+            padding: 40px 60px;
+            height: 100%;
+            width: 100%;
+        }
+
+        #app-icon {
+            margin-right: 60px;
+            height: 100%;
+            float: left;
+        }
+
+        #app-icon img {
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            border: 1px solid #b4b4b4;
+            border-radius: 20px;
+        }
+
+        #app-info {
+            margin-bottom: 20px;
+            line-height: 50px;
+            min-height: 130px;
+        }
+
+        #app-name {
+            font-size: 40px;
+            text-shadow: 2px 2px 5px #000000;
+        }
+
+        #app-version {
+            margin-left: 10px;
+            font-size: 18px;
+        }
+
+        #app-version:before {
+            content: "(v";
+        }
+
+        #app-version:after {
+            content: ")";
+        }
+
+        #app-description {
+            font-size: 22px;
+            text-overflow: ellipsis;
+            line-height: 40px;
+        }
+    </style>
+</head>
+<body>
+<div id="welcome">
+    <div id="app-icon"><img src="../image/nopic.png"/></div>
+    <div id="app-info">
+        <div id="app-name">布卡漫画<span id="app-version">0.0.1</span></div>
+        <div id="app-description">布卡漫画非官方桌面客户端。</div>
+    </div>
+    <div>
+        <div class="btn btn-primary">打开应用</div>
+        <div class="btn btn-default">在新窗口打开应用</div>
+    </div>
+</div>
+</body>
+</html>
