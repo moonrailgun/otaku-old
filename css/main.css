@@ -73,7 +73,7 @@ nav.navbar{
 }
 
 /*page app*/
-.header-bar{
+#inline-app .header-bar{
     position: relative;
     top: 0;
     right: 0;
@@ -89,7 +89,7 @@ nav.navbar{
     text-align: center;
 }
 
-.header-bar .header-back{
+#inline-app .header-bar .header-back{
     padding-left: 10px;
     font-size: 16px;
     font-weight: 400;
@@ -97,7 +97,7 @@ nav.navbar{
     color: #ffffff;
 }
 
-.header-bar .header-title{
+#inline-app .header-bar .header-title{
     right: 80px;
     left: 80px;
     width: auto;
@@ -107,4 +107,12 @@ nav.navbar{
     position: absolute;
     text-align: center;
     white-space: nowrap;
+}
+
+#inline-app-wrapper{
+    position: absolute;
+    top:45px;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
