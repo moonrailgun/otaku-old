@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/font-awesome.css" rel="stylesheet">
+    <style>
+        ul.nav{
+            margin-bottom: 15px;
+        }
+        ul.nav li{
+            border-bottom: 1px solid #e7e7e7;
+        }
+        ul.nav .list-search{
+            padding: 15px;
+        }
+        ul.nav li a{
+            font-size: 18px;
+            line-height: 26px;
+            color: inherit;
+        }
+        ul.nav li a i{
+            position: absolute;
+            right: 15px;
+            line-height: inherit;
+        }
+    </style>
+</head>
+<body>
+<div id="list-with-search" class="container">
+    <ul class="nav">
+        <li class="list-search">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">
+                        <i class="icon-search"></i>
+                    </button>
+                </span>
+            </div>
+        </li>
+        <li>
+            <a href="#">
+                <span>银魂</span>
+                <i class="icon-angle-right"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span>死亡笔记</span>
+                <i class="icon-angle-right"></i>
+            </a>
+        </li>
+    </ul>
+    <ul class="pagination">
+        <li class="disabled"><a href="#">上一页</a></li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">下一页</a></li>
+    </ul>
+</div>
+</body>
+</html>
